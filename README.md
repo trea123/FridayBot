@@ -62,4 +62,3 @@ To uninstall the bot from a *production* system, you can execute the following c
 ```bash
 sudo bash uninstall.sh
 ```
-e
