@@ -52,3 +52,13 @@ systemctl stop fridaybot  # stopping bot systemd service
 ```
 
 **Note**, for production the bot is designed to work on Linux systems only...
+
+---
+
+## Uninstall
+
+To uninstall the bot from a *production* system, you can execute the following command:
+
+```bash
+sudo bash uninstall.sh
+```
