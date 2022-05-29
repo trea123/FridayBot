@@ -47,7 +47,7 @@ sudo bash install.sh
 Then, in production you can start and stop the bot using the following commands (after running the installation script):
 
 ```bash
-systemctl start fridaybot     # starting bot systemd service
+systemctl start fridaybot # starting bot systemd service
 systemctl stop fridaybot  # stopping bot systemd service
 ```
 
