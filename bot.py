@@ -52,11 +52,6 @@ async def ping(ctx):
     await ctx.send(f"ping = {round(client.latency * 1000)}ms")
 
 
-@client.command()
-async def
-
-
-
 if __name__ == "__main__":
     import argparse
 
