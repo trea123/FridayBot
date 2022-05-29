@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Project Path Constants
-PROJECT_PATH=/opt/FridayBot
-PROJECT_ENTRY=${PROJECT_PATH}/fridaybot.py
+PROJECT_PATH=/opt/DiscordBot
+PROJECT_ENTRY=${PROJECT_PATH}/bot.py
 PROJECT_REQUIREMENTS=${PROJECT_PATH}/requirements.txt
 
 # Virtual Environment Path Constants
@@ -12,15 +12,15 @@ VENV_ACTIVATE=${VENV_PATH}/bin/activate
 
 # Current Path Constants
 CURRENT_PATH=`pwd -P`
-CURRENT_ENTRY=${CURRENT_PATH}/fridaybot.py
+CURRENT_ENTRY=${CURRENT_PATH}/bot.py
 CURRENT_REQUIREMENTS=${CURRENT_PATH}/requirements.txt
 
 # Token Path Constants
-TOKEN_PATH=/etc/FridayBot
+TOKEN_PATH=/etc/DiscordBot
 TOKEN_FILE=${TOKEN_PATH}/token.txt
 
 # Systemd Service Path Constant
-SYSTEMD_PATH=/usr/lib/systemd/system/fridaybot.service
+SYSTEMD_PATH=/usr/lib/systemd/system/discordbot.service
 
 # Checks if user is root when running install
 if [ `id -u` != 0 ]; then
@@ -44,8 +44,8 @@ if [ $? -ne 0 ]; then
     fi
 fi
 
-# Copy the FridayBot source code to the project path
-echo "[*] Copying the FridayBot source code to the project path" &&
+# Copy the DiscordBot source code to the project path
+echo "[*] Copying the DiscordBot source code to the project path" &&
 cp $CURRENT_ENTRY $PROJECT_PATH &&
 cp $CURRENT_REQUIREMENTS $PROJECT_PATH &&
 
@@ -53,7 +53,7 @@ cp $CURRENT_REQUIREMENTS $PROJECT_PATH &&
 echo "[*] Locking down the project permissions and ownership" &&
 chown -R root:root $PROJECT_PATH &&
 chmod 700 $PROJECT_PATH &&
-chmod 600 "${PROJECT_PATH}/fridaybot.py" &&
+chmod 600 $PROJECT_ENTRY &&
 
 # Activate the Python virtual environment and install dependencies
 echo "[*] Activating the Python virtual environment and installing dependencies" &&
@@ -87,12 +87,12 @@ chmod 600 $TOKEN_FILE &&
 
 # Wipes old systemd service and recreates the service to manage the bot
 echo "[*] Wiping old systemd service and recreating the service to manage the bot" &&
-systemctl kill -s SIGKILL fridaybot 2>/dev/null
-systemctl stop fridaybot 2>/dev/null
+systemctl kill -s SIGKILL discordbot 2>/dev/null
+systemctl stop discordbot 2>/dev/null
 rm -f $SYSTEMD_PATH &&
 cat << EOF > $SYSTEMD_PATH
 [Unit]
-Description="Friday - Discord Bot"
+Description="Discord Bot"
 
 [Service]
 WorkingDirectory=${PROJECT_PATH}
@@ -107,6 +107,6 @@ EOF
 
 # Enables automatic startup on boot and starts the service for this instance
 echo "[*] Enabling automatic startup on boot and starting the service for this instance" &&
-systemctl enable fridaybot
-systemctl start fridaybot
+systemctl enable discordbot
+systemctl start discordbot
 echo "[+] Finished"
