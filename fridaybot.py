@@ -33,7 +33,7 @@ async def on_member_join(member):
 
         
 @client.event
-async def on_member_leave(member):
+async def on_member_remove(member):
     """Announces that a member has joined the server"""
 
     target_channel = "test"
