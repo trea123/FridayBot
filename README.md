@@ -1,7 +1,7 @@
 
-# FridayBot
+# Discord Bot
 
-Friday bot is used to learn a combination of Python and the discord.py package.
+Discord Bot is used to learn a combination of Python and the discord.py package.
 
 ---
 
@@ -23,15 +23,15 @@ lsb_release -a
 
 *Development*
 
-You need to set the bot token to an environment variable called **FRIDAY_TOKEN** and then run the following commands to setup and start the bot:
+You need to set the bot token to an environment variable called **BOT_TOKEN** and then run the following commands to setup and start the bot:
 
 ```bash
-export FRIDAY_TOKEN="<YOUR_TOKEN_GOES_HERE>"  # or set FRIDAY_TOKEN="<YOUR_TOKEN_GOES_HERE>" on windows
+export BOT_TOKEN="<YOUR_TOKEN_GOES_HERE>"  # or set BOT_TOKEN="<YOUR_TOKEN_GOES_HERE>" on windows
 python3 -m venv venv
 source venv/bin/activate # or .\venv\Scripts\activate.bat on windows
 pip install --upgrade pip
 pip install -r requirements.txt
-python fridaybot.py
+python bot.py
 ```
 
 ---
@@ -47,8 +47,8 @@ sudo bash install.sh
 Then, in production you can start and stop the bot using the following commands (after running the installation script):
 
 ```bash
-systemctl start fridaybot # starting bot systemd service
-systemctl stop fridaybot  # stopping bot systemd service
+systemctl start discordbot # starting bot systemd service
+systemctl stop discordbot  # stopping bot systemd service
 ```
 
 **Note**, for production the bot is designed to work on Linux systems only...
