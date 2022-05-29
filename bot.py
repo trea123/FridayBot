@@ -1,4 +1,4 @@
-"""Module for running the FridayBot"""
+"""Module for running the DiscordBot"""
 import sys
 import os
 import discord
@@ -7,7 +7,7 @@ from discord.ext import commands
 intents = discord.Intents.default()
 intents.members = True
 
-client = commands.Bot(command_prefix="friday ", intents=intents)
+client = commands.Bot(command_prefix=">", intents=intents)
 
 
 @client.event
@@ -59,14 +59,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     if args.prod is True:
-        prod_config = "/etc/FridayBot/token.txt"
+        prod_config = "/etc/DiscordBot/token.txt"
         with open(prod_config, "r") as file:
             token = file.read().strip()
     else:
         try:
-            token = os.environ['FRIDAY_TOKEN']
+            token = os.environ['BOT_TOKEN']
         except KeyError:
-            print('[!] Missing FRIDAY_TOKEN environment variable.')
+            print('[!] Missing BOT_TOKEN environment variable.')
             sys.exit(1)
     
     client.run(token)

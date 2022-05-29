@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Global Constants
-PROJECT_PATH=/opt/FridayBot
-TOKEN_PATH=/etc/FridayBot
-SYSTEMD_PATH=/usr/lib/systemd/system/fridaybot.service
+PROJECT_PATH=/opt/DiscordBot
+TOKEN_PATH=/etc/DiscordBot
+SYSTEMD_PATH=/usr/lib/systemd/system/discordbot.service
 
 # Checks if user is root when running install
 if [ `id -u` != 0 ]; then
@@ -21,8 +21,8 @@ rm -rf $TOKEN_PATH &&
 
 # Wipes old systemd service
 echo "[*] Wiping old systemd service" &&
-systemctl disable fridaybot 2>/dev/null
-systemctl kill -s SIGKILL fridaybot 2>/dev/null
-systemctl stop fridaybot 2>/dev/null
+systemctl disable discordbot 2>/dev/null
+systemctl kill -s SIGKILL discordbot 2>/dev/null
+systemctl stop discordbot 2>/dev/null
 rm -f $SYSTEMD_PATH &&
 echo "[+] Finished"
