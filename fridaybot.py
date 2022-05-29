@@ -31,6 +31,21 @@ async def on_member_join(member):
     else:
         print(f"Could not find channel {target_channel}")
 
+        
+@client.event
+async def on_member_leave(member):
+    """Announces that a member has joined the server"""
+
+    target_channel = "test"
+    for channel in member.guild.channels:
+        if str(channel) == target_channel:
+            embed = discord.Embed(color=0x4a3d9a)
+            embed.add_field(name="Goodbye", value=f"{member.name} left {member.guild.name}", inline=False)
+            await channel.send(embed=embed)
+            break
+    else:
+        print(f"Could not find channel {target_channel}")
+
 
 if __name__ == "__main__":
     import argparse
