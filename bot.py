@@ -47,6 +47,16 @@ async def on_member_remove(member):
         print(f"Could not find channel {target_channel}")
 
 
+@client.command()
+async def ping(ctx):
+    await ctx.send(f"ping = {round(client.latency * 1000)}ms")
+
+
+@client.command()
+async def
+
+
+
 if __name__ == "__main__":
     import argparse
 
