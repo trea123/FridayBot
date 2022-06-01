@@ -3,6 +3,8 @@
 
 Discord Bot is used to learn a combination of Python and the discord.py package.
 
+In order to use the *Join-Leave* event functionality, you must have a **Text Channel** named `join-leave` in your server.
+
 ---
 
 ## OS & Python Version Info
