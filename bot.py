@@ -49,7 +49,7 @@ async def on_member_remove(member):
 
 @client.command()
 async def ping(ctx):
-    await ctx.send(f"ping = {round(client.latency * 1000)}ms")
+    await ctx.send(f"time={round(client.latency * 1000, 1)} ms")
 
 
 if __name__ == "__main__":
