@@ -58,8 +58,8 @@ chmod 600 $PROJECT_ENTRY &&
 # Activate the Python virtual environment and install dependencies
 echo "[*] Activating the Python virtual environment and installing dependencies" &&
 source $VENV_ACTIVATE &&
-pip install --upgrade pip &&
-pip install -r $PROJECT_REQUIREMENTS
+pip install -i https://pypi.org/simple --upgrade pip &&
+pip install -i https://pypi.org/simple -r $PROJECT_REQUIREMENTS
 if [ $? -ne 0 ]; then
     echo "[!] Failed to install required packages." >&2
     exit 3
