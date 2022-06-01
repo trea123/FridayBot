@@ -21,7 +21,7 @@ async def on_ready():
 async def on_member_join(member):
     """Announces that a member has joined the server"""
 
-    target_channel = "test"
+    target_channel = "join-leave"
     for channel in member.guild.channels:
         if str(channel) == target_channel:
             embed = discord.Embed(color=0x4a3d9a)
@@ -34,9 +34,9 @@ async def on_member_join(member):
         
 @client.event
 async def on_member_remove(member):
-    """Announces that a member has joined the server"""
+    """Announces that a member has left the server"""
 
-    target_channel = "test"
+    target_channel = "join-leave"
     for channel in member.guild.channels:
         if str(channel) == target_channel:
             embed = discord.Embed(color=0x4a3d9a)
@@ -45,6 +45,13 @@ async def on_member_remove(member):
             break
     else:
         print(f"Could not find channel {target_channel}")
+
+
+@client.command()
+async def ping(ctx):
+    """Pings the latency between the bot and the server"""
+
+    await ctx.send(f"time={round(client.latency * 1000, 1)} ms")
 
 
 if __name__ == "__main__":
@@ -66,7 +73,7 @@ if __name__ == "__main__":
         try:
             token = os.environ['BOT_TOKEN']
         except KeyError:
-            print('[!] Missing BOT_TOKEN environment variable.')
+            print("[!] Missing BOT_TOKEN environment variable")
             sys.exit(1)
     
     client.run(token)
