@@ -1,9 +1,15 @@
 #!/bin/bash
 
-# Global Constants
-PROJECT_PATH=/opt/DiscordBot
-TOKEN_PATH=/etc/DiscordBot
-SYSTEMD_PATH=/usr/lib/systemd/system/discordbot.service
+# Global Constants (ONLY NEED TO CHANGE THESE)
+PROJECT_NAME=FridayBot
+SERVICE_NAME=fridaybot
+
+###################################################
+
+# Path Constants
+PROJECT_PATH=/opt/$PROJECT_NAME
+TOKEN_PATH=/etc/$PROJECT_NAME
+SYSTEMD_PATH=/usr/lib/systemd/system/$SERVICE_NAME.service
 
 # Checks if user is root when running install
 if [ `id -u` != 0 ]; then
@@ -21,8 +27,8 @@ rm -rf $TOKEN_PATH &&
 
 # Wipes old systemd service
 echo "[*] Wiping old systemd service" &&
-systemctl disable discordbot 2>/dev/null
-systemctl kill -s SIGKILL discordbot 2>/dev/null
-systemctl stop discordbot 2>/dev/null
+systemctl disable $SERVICE_NAME 2>/dev/null
+systemctl kill -s SIGKILL $SERVICE_NAME 2>/dev/null
+systemctl stop $SERVICE_NAME 2>/dev/null
 rm -f $SYSTEMD_PATH &&
 echo "[+] Finished"

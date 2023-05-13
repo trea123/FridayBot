@@ -1,8 +1,15 @@
 #!/bin/bash
 
-# Project Path Constants
-PROJECT_PATH=/opt/DiscordBot
-PROJECT_ENTRY=${PROJECT_PATH}/bot.py
+# Global Constants (ONLY NEED TO CHANGE THESE)
+PROJECT_NAME=FridayBot
+SERVICE_NAME=fridaybot
+SCRIPT_NAME=friday.py
+
+###################################################
+
+# Path Constants
+PROJECT_PATH=/opt/$PROJECT_NAME
+PROJECT_ENTRY=${PROJECT_PATH}/$SCRIPT_NAME
 PROJECT_REQUIREMENTS=${PROJECT_PATH}/requirements.txt
 
 # Virtual Environment Path Constants
@@ -12,15 +19,15 @@ VENV_ACTIVATE=${VENV_PATH}/bin/activate
 
 # Current Path Constants
 CURRENT_PATH=`pwd -P`
-CURRENT_ENTRY=${CURRENT_PATH}/bot.py
+CURRENT_ENTRY=${CURRENT_PATH}/$SCRIPT_NAME
 CURRENT_REQUIREMENTS=${CURRENT_PATH}/requirements.txt
 
 # Token Path Constants
-TOKEN_PATH=/etc/DiscordBot
+TOKEN_PATH=/etc/$PROJECT_NAME
 TOKEN_FILE=${TOKEN_PATH}/token.txt
 
 # Systemd Service Path Constant
-SYSTEMD_PATH=/usr/lib/systemd/system/discordbot.service
+SYSTEMD_PATH=/usr/lib/systemd/system/$SERVICE_NAME.service
 
 # Checks if user is root when running install
 if [ `id -u` != 0 ]; then
@@ -44,8 +51,8 @@ if [ $? -ne 0 ]; then
     fi
 fi
 
-# Copy the DiscordBot source code to the project path
-echo "[*] Copying the DiscordBot source code to the project path" &&
+# Copy the Discord bot source code to the project path
+echo "[*] Copying the Discord bot source code to the project path" &&
 cp $CURRENT_ENTRY $PROJECT_PATH &&
 cp $CURRENT_REQUIREMENTS $PROJECT_PATH &&
 
@@ -87,8 +94,8 @@ chmod 600 $TOKEN_FILE &&
 
 # Wipes old systemd service and recreates the service to manage the bot
 echo "[*] Wiping old systemd service and recreating the service to manage the bot" &&
-systemctl kill -s SIGKILL discordbot 2>/dev/null
-systemctl stop discordbot 2>/dev/null
+systemctl kill -s SIGKILL $SERVICE_NAME 2>/dev/null
+systemctl stop $SERVICE_NAME 2>/dev/null
 rm -f $SYSTEMD_PATH &&
 cat << EOF > $SYSTEMD_PATH
 [Unit]
@@ -107,6 +114,6 @@ EOF
 
 # Enables automatic startup on boot and starts the service for this instance
 echo "[*] Enabling automatic startup on boot and starting the service for this instance" &&
-systemctl enable discordbot
-systemctl start discordbot
+systemctl reenable $SERVICE_NAME
+systemctl restart $SERVICE_NAME
 echo "[+] Finished"
