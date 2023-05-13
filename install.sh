@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Global Constants (ONLY NEED TO CHANGE THESE)
-PROJECT_NAME=FridayBot
-SERVICE_NAME=fridaybot
-SCRIPT_NAME=friday.py
-
-###################################################
+# Global Constants
+PROJECT_NAME=$(dirname $(realpath $0) | tr '/' '\n' | tail -1)
+SERVICE_NAME=$(echo $PROJECT_NAME | tr '[:upper:]' '[:lower:]')
+SCRIPT_NAME=$SERVICE_NAME.py
 
 # Path Constants
 PROJECT_PATH=/opt/$PROJECT_NAME
@@ -27,7 +25,7 @@ TOKEN_PATH=/etc/$PROJECT_NAME
 TOKEN_FILE=${TOKEN_PATH}/token.txt
 
 # Systemd Service Path Constant
-SYSTEMD_PATH=/usr/lib/systemd/system/$SERVICE_NAME.service
+SYSTEMD_PATH=/etc/systemd/system/$SERVICE_NAME.service
 
 # Checks if user is root when running install
 if [ `id -u` != 0 ]; then
@@ -80,6 +78,7 @@ rm -f $PROJECT_REQUIREMENTS &&
 echo "[*] Wiping old token configuration directory and recreating directory" &&
 rm -rf $TOKEN_PATH &&
 mkdir -p $TOKEN_PATH &&
+echo "[+] Wiped old configuration at path: $TOKEN_PATH"
 
 # Query user for token
 echo -n "[*] Enter the bot token: "
@@ -91,6 +90,7 @@ echo $BOT_TOKEN > $TOKEN_FILE &&
 chown -R root:root $TOKEN_PATH &&
 chmod 700 $TOKEN_PATH &&
 chmod 600 $TOKEN_FILE &&
+echo "[+] Created new configuration at path: $TOKEN_FILE"
 
 # Wipes old systemd service and recreates the service to manage the bot
 echo "[*] Wiping old systemd service and recreating the service to manage the bot" &&

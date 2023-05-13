@@ -1,7 +1,7 @@
 
-# Discord Bot
+# FridayBot
 
-Discord Bot is used to learn a combination of Python and the discord.py package.
+FridayBot is used to learn a combination of Python and the discord.py package.
 
 ---
 
@@ -31,7 +31,7 @@ python3 -m venv venv
 source venv/bin/activate # or .\venv\Scripts\activate.bat on windows
 pip install --upgrade pip
 pip install -r requirements.txt
-python friday.py
+python fridaybot.py
 ```
 
 ---

@@ -11,10 +11,15 @@ logging.basicConfig(level=logging.DEBUG,
                     handlers=[logging.FileHandler("debug.log", mode="a"),
                               logging.StreamHandler(sys.stdout)])
 
-logger = logging.getLogger("friday")
+project_path = os.path.abspath(__file__)
+project_service = project_path.split(os.path.sep)[-1].split(".")[0]
+project_dir = os.path.dirname(project_path)
+project_name = project_dir.split(os.path.sep)[-1]
 
-PROD_FILE = "/etc/DiscordBot/token.txt"
-DEV_FILE = ".token.txt"
+logger = logging.getLogger(project_service)
+
+PROD_FILE = f"/etc/{project_name}/token.txt"
+DEV_FILE = f"{project_dir}/.token.txt"
 
 intents = discord.Intents.all()
 intents.members = True
